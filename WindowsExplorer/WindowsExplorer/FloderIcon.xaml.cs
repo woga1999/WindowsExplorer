@@ -21,15 +21,14 @@ namespace WindowsExplorer
     /// </summary>
     public partial class FloderIcon : UserControl
     {
-        ColorAnimation ca = new ColorAnimation(Colors.Violet, new Duration(TimeSpan.FromMilliseconds(500)));
-        TextBlock tb = new TextBlock();
-        int fc;
+        TextBlock folderTextBlock = new TextBlock();
+        int flag;
         string name;
 
         public FloderIcon(string str)
         {
             InitializeComponent();
-            fc = 0; name = str;
+            flag = 0; name = str;
             Rectangle rect = new Rectangle();
 
             rect.Fill = new ImageBrush(new BitmapImage(new Uri(@"folderopened_yellow.png", UriKind.RelativeOrAbsolute)));
@@ -39,8 +38,8 @@ namespace WindowsExplorer
             rect.HorizontalAlignment = HorizontalAlignment.Center;
 
             //TextBlock tb = new TextBlock();
-            tb.VerticalAlignment = VerticalAlignment.Bottom;
-            tb.HorizontalAlignment = HorizontalAlignment.Center;
+            folderTextBlock.VerticalAlignment = VerticalAlignment.Bottom;
+            folderTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
 
             if (str.Length > 7)
@@ -48,16 +47,16 @@ namespace WindowsExplorer
                 str = str.Substring(0, 7) + "...";
             }
 
-            tb.Text = str;
-            tb.Foreground = new SolidColorBrush(Colors.Black);
-            tb.HorizontalAlignment = HorizontalAlignment.Center;
+            folderTextBlock.Text = str;
+            folderTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+            folderTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
-            tb.HorizontalAlignment = HorizontalAlignment.Center;
+            folderTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
             root.VerticalAlignment = VerticalAlignment.Stretch;
             root.HorizontalAlignment = HorizontalAlignment.Stretch;
             root.Children.Add(rect);
-            root.Children.Add(tb);
+            root.Children.Add(folderTextBlock);
             root.Margin = new Thickness(2);
             
             this.MouseUp += new MouseButtonEventHandler(FolderIcon_MouseUp);
@@ -67,34 +66,34 @@ namespace WindowsExplorer
 
         void FolderIcon_MouseUp(object sender, MouseButtonEventArgs e)
         {
-            if (fc == 0)
+            if (flag == 0)
             {
                 root.Background = new SolidColorBrush(Colors.SteelBlue);
-                tb.Foreground = new SolidColorBrush(Colors.Black);
-                string shortName = tb.Text;
-                tb.Text = name;
+                folderTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                string shortName = folderTextBlock.Text;
+                folderTextBlock.Text = name;
                 name = shortName;
-                fc = 1;
+                flag = 1;
             }
             else
             {
                 root.Background = new SolidColorBrush(Colors.Transparent);
-                tb.Foreground = new SolidColorBrush(Colors.Black);
-                string longName = tb.Text;
-                tb.Text = name;
+                folderTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                string longName = folderTextBlock.Text;
+                folderTextBlock.Text = name;
                 name = longName;
 
-                fc = 0;
+                flag = 0;
             }
         }
         void FolderIcon_MouseLeave(object sender, MouseEventArgs e)
         {
            root.Background = new SolidColorBrush(Colors.Transparent);
-            if(fc == 1)
+            if(flag == 1)
             {
                 root.Background = new SolidColorBrush(Colors.SteelBlue);
             }
-            else if(fc == 0)
+            else if(flag == 0)
             {
                 root.Background = new SolidColorBrush(Colors.Transparent);
             }
@@ -104,8 +103,7 @@ namespace WindowsExplorer
 
         void FolderIcon_MouseEnter(object sender, MouseEventArgs e)
         {
-                root.Background = new SolidColorBrush(Colors.SkyBlue);
-            
+            root.Background = new SolidColorBrush(Colors.SkyBlue);
         }
     }
     

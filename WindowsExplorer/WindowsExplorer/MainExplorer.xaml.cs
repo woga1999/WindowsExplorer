@@ -40,7 +40,8 @@ namespace WindowsExplorer
         {
             var firstRoot = new TreeViewItem();
 
-            try {
+            //try
+            //{
                 foreach (string itemName in Directory.GetLogicalDrives())
                 {
                     TreeViewItem item = new TreeViewItem();
@@ -51,8 +52,8 @@ namespace WindowsExplorer
                     item.Expanded += new RoutedEventHandler(folder_Expanded);
                     treeView.Items.Add(item);
                 }
-            }
-            catch(Exception) { }
+            //}
+            //catch (Exception) { }
 
         }
 
@@ -62,12 +63,12 @@ namespace WindowsExplorer
             if (item.Items.Count == 1 && item.Items[0] == dummyNode)
             {
                 item.Items.Clear();
-                foreach (string s in Directory.GetDirectories(item.Tag.ToString()))
+                foreach (string subitem_name in Directory.GetDirectories(item.Tag.ToString()))
                 {
                     TreeViewItem subitem = new TreeViewItem();
-                    subitem.Header = s.Substring(s.LastIndexOf("\\") + 1);
+                    subitem.Header = subitem_name.Substring(subitem_name.LastIndexOf("\\") + 1);
                     
-                    subitem.Tag = s;
+                    subitem.Tag = subitem_name;
                     subitem.FontWeight = FontWeights.Normal;
 
                     subitem.Items.Add(dummyNode);
@@ -101,7 +102,7 @@ namespace WindowsExplorer
                     break;
                 }
                 temp = ((TreeViewItem)temp.Parent);
-                temp2 = @"\\";
+                temp2 = @"\";
             }
             //show user selected path
             ClickTreeView(SelectedPath);

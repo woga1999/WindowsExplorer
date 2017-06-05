@@ -22,14 +22,13 @@ namespace WindowsExplorer
     /// </summary>
     public partial class FileIcon : UserControl
     {
-        TextBlock tb = new TextBlock();
-        int fc; string name;
-        ColorAnimation ca = new ColorAnimation(Colors.Aquamarine, new Duration(TimeSpan.FromMilliseconds(500)));
-
+        TextBlock fileTextBlock = new TextBlock();
+        int flag; string name;
+       
         public FileIcon(string str)
         {
             InitializeComponent();
-            fc = 0;
+            flag = 0;
             try
             {
                 Rectangle rect = new Rectangle();
@@ -42,8 +41,8 @@ namespace WindowsExplorer
                 rect.HorizontalAlignment = HorizontalAlignment.Center;
 
                 //TextBlock tb = new TextBlock();
-                tb.VerticalAlignment = VerticalAlignment.Bottom;
-                tb.HorizontalAlignment = HorizontalAlignment.Center;
+                fileTextBlock.VerticalAlignment = VerticalAlignment.Bottom;
+                fileTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
                 FileInfo fi = new FileInfo(str);
                 str = fi.Name;
@@ -54,16 +53,16 @@ namespace WindowsExplorer
                     str = str.Substring(0, 7) + "...";
                 }
 
-                tb.Text = str;
-                tb.Foreground = new SolidColorBrush(Colors.Black);
-                tb.HorizontalAlignment = HorizontalAlignment.Center;
+                fileTextBlock.Text = str;
+                fileTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                fileTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
-                tb.HorizontalAlignment = HorizontalAlignment.Center;
+                fileTextBlock.HorizontalAlignment = HorizontalAlignment.Center;
 
                 root.VerticalAlignment = VerticalAlignment.Stretch;
                 root.HorizontalAlignment = HorizontalAlignment.Stretch;
                 root.Children.Add(rect);
-                root.Children.Add(tb);
+                root.Children.Add(fileTextBlock);
                 root.Margin = new Thickness(2);
             }
             catch (Exception) { }
@@ -92,24 +91,24 @@ namespace WindowsExplorer
 
         void FileIcon_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (fc == 0)
+            if (flag == 0)
             {
 
                 root.Background = new SolidColorBrush(Colors.SkyBlue);
-                tb.Foreground = new SolidColorBrush(Colors.Black);
-                string shortName = tb.Text;
-                tb.Text = name;
+                fileTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                string shortName = fileTextBlock.Text;
+                fileTextBlock.Text = name;
                 name = shortName;
-                fc = 1;
+                flag = 1;
             }
             else
             {
                 root.Background = new SolidColorBrush(Colors.Transparent);
-                tb.Foreground = new SolidColorBrush(Colors.Black);
-                string longName = tb.Text;
-                tb.Text = name;
+                fileTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                string longName = fileTextBlock.Text;
+                fileTextBlock.Text = name;
                 name = longName;
-                fc = 0;
+                flag = 0;
             }
         }
 
@@ -121,11 +120,11 @@ namespace WindowsExplorer
         void FileIcon_MouseLeave(object sender, MouseEventArgs e)
         {
             root.Background = new SolidColorBrush(Colors.Transparent);
-            if (fc == 1)
+            if (flag == 1)
             {
                 root.Background = new SolidColorBrush(Colors.SteelBlue);
             }
-            else if (fc == 0)
+            else if (flag == 0)
             {
                 root.Background = new SolidColorBrush(Colors.Transparent);
             }
