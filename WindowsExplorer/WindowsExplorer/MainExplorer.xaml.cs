@@ -38,12 +38,8 @@ namespace WindowsExplorer
 
         private void treeView_Loaded(object sender, RoutedEventArgs e)
         {
-            var firstRoot = new TreeViewItem();
-
-            //try
-            //{
-                foreach (string itemName in Directory.GetLogicalDrives())
-                {
+            foreach (string itemName in Directory.GetLogicalDrives())
+            {
                     TreeViewItem item = new TreeViewItem();
                     item.Header = itemName;
                     item.Tag = itemName;
@@ -51,10 +47,10 @@ namespace WindowsExplorer
                     item.Items.Add(dummyNode);
                     item.Expanded += new RoutedEventHandler(folder_Expanded);
                     treeView.Items.Add(item);
-                }
+                
+            }
             //}
             //catch (Exception) { }
-
         }
 
         void folder_Expanded(object sender, RoutedEventArgs e)
@@ -65,15 +61,19 @@ namespace WindowsExplorer
                 item.Items.Clear();
                 foreach (string subitem_name in Directory.GetDirectories(item.Tag.ToString()))
                 {
-                    TreeViewItem subitem = new TreeViewItem();
-                    subitem.Header = subitem_name.Substring(subitem_name.LastIndexOf("\\") + 1);
-                    
-                    subitem.Tag = subitem_name;
-                    subitem.FontWeight = FontWeights.Normal;
+                    DirectoryInfo directory = new DirectoryInfo(subitem_name);
+                    if ((directory.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
+                    {
+                        TreeViewItem subitem = new TreeViewItem();
+                        subitem.Header = subitem_name.Substring(subitem_name.LastIndexOf("\\") + 1);
 
-                    subitem.Items.Add(dummyNode);
-                    subitem.Expanded += new RoutedEventHandler(folder_Expanded);
-                    item.Items.Add(subitem);
+                        subitem.Tag = subitem_name;
+                        subitem.FontWeight = FontWeights.Normal;
+
+                        subitem.Items.Add(dummyNode);
+                        subitem.Expanded += new RoutedEventHandler(folder_Expanded);
+                        item.Items.Add(subitem);
+                    }
                 }
             }
         }
@@ -114,42 +114,48 @@ namespace WindowsExplorer
             RightWrap.Children.Clear();
             DirectoryInfo directoryInfo = new DirectoryInfo(path);
 
-
             string name;
             foreach (var item in directoryInfo.GetDirectories())
             {
-                name = item.ToString();
-                FloderIcon floder = new FloderIcon(name);
-                if (path.Equals("C:\\") || path.Equals("D:\\"))
+                if ((item.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
                 {
-                    floder.Tag = path + name;
+                    name = item.ToString();
+                    FloderIcon floder = new FloderIcon(name);
+                    if (path.Equals("C:\\") || path.Equals("D:\\"))
+                    {
+                        floder.Tag = path + name;
+                    }
+                    else
+                    {
+                        floder.Tag = path + "\\" + name;
+                    }
+                    RightWrap.Children.Add(floder);
+                    floder.MouseLeftButtonDown += new MouseButtonEventHandler(bt_Click);
                 }
-                else
-                {
-                    floder.Tag = path + "\\" + name;
-                }
-                RightWrap.Children.Add(floder);
-                floder.MouseLeftButtonDown += new MouseButtonEventHandler(bt_Click);
             }
 
-            foreach (var item in directoryInfo.GetFiles())
+            foreach (var fileItem in directoryInfo.GetFiles())
             {
-                name = item.ToString();
-                if (path.Equals("C:\\") || path.Equals("D:\\"))
+                if ((fileItem.Attributes & FileAttributes.Hidden) != FileAttributes.Hidden)
                 {
-                    FileIcon fileIcon = new FileIcon(path + name);
-                    fileIcon.Tag = path + name;
-                    RightWrap.Children.Add(fileIcon);
-                    fileIcon.MouseLeftButtonDown += new MouseButtonEventHandler(fIcon_MouseLeftButtonDown);
+                    name = fileItem.ToString();
+                    if (path.Equals("C:\\") || path.Equals("D:\\"))
+                    {
+                        FileIcon fileIcon = new FileIcon(path + name);
+                        fileIcon.Tag = path + name;
+                        RightWrap.Children.Add(fileIcon);
+                        fileIcon.MouseLeftButtonDown += new MouseButtonEventHandler(fIcon_MouseLeftButtonDown);
+                    }
+
+                    else
+                    {
+                        FileIcon fileIcon = new FileIcon(path + "\\" + name);
+                        fileIcon.Tag = path + "\\" + name;
+                        RightWrap.Children.Add(fileIcon);
+                        fileIcon.MouseLeftButtonDown += new MouseButtonEventHandler(fIcon_MouseLeftButtonDown);
+                    }
                 }
 
-                else
-                {
-                    FileIcon fileIcon = new FileIcon(path + "\\" + name);
-                    fileIcon.Tag = path + "\\" + name;
-                    RightWrap.Children.Add(fileIcon);
-                    fileIcon.MouseLeftButtonDown += new MouseButtonEventHandler(fIcon_MouseLeftButtonDown);
-                }
             }
             pathTextBox.Text = path;
         }

@@ -99,7 +99,6 @@ namespace WindowsExplorer
             }
             
         }
-        
 
         void FolderIcon_MouseEnter(object sender, MouseEventArgs e)
         {
