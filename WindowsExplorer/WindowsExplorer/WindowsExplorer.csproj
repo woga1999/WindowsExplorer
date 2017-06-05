@@ -77,6 +77,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DirectoryExcept.cs" />
     <Compile Include="FileIcon.xaml.cs">
       <DependentUpon>FileIcon.xaml</DependentUpon>
     </Compile>
@@ -84,7 +85,6 @@
       <DependentUpon>FloderIcon.xaml</DependentUpon>
     </Compile>
     <Compile Include="HeaderToImageConverter.cs" />
-    <Compile Include="IconHelper.cs" />
     <Compile Include="MainExplorer.xaml.cs">
       <DependentUpon>MainExplorer.xaml</DependentUpon>
     </Compile>
@@ -127,10 +127,7 @@
     <Resource Include="right.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="down.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="refresh.png" />
+    <Resource Include="enter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

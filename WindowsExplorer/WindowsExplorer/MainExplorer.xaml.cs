@@ -21,17 +21,18 @@ namespace WindowsExplorer
     /// </summary>
     public partial class MainExplorer : UserControl
     {
-        DirectoryInfo info;
+        private DirectoryExcept exception = new DirectoryExcept();
         public DateTime lastClick = DateTime.Now.AddSeconds(-1);
         public FileIcon originFicon = new FileIcon("");
         public FloderIcon origin = new FloderIcon("");
         private object dummyNode = null;
-        public string temp= null;
         public List<string> savePath = new List<string>();
         int folderCount = 0;
+
         public MainExplorer()
         {
             InitializeComponent();
+            //exception = new DirectoryExcept(this);
         }
         public string SelectedPath { get; set; }
 
@@ -39,17 +40,20 @@ namespace WindowsExplorer
         {
             var firstRoot = new TreeViewItem();
 
-            
-            foreach (string itemName in Directory.GetLogicalDrives())
-            {
-                TreeViewItem item = new TreeViewItem();
-                item.Header = itemName;
-                item.Tag = itemName;
-                item.FontWeight = FontWeights.Normal;
-                item.Items.Add(dummyNode);
-                item.Expanded += new RoutedEventHandler(folder_Expanded);
-                treeView.Items.Add(item);
+            try {
+                foreach (string itemName in Directory.GetLogicalDrives())
+                {
+                    TreeViewItem item = new TreeViewItem();
+                    item.Header = itemName;
+                    item.Tag = itemName;
+                    item.FontWeight = FontWeights.Normal;
+                    item.Items.Add(dummyNode);
+                    item.Expanded += new RoutedEventHandler(folder_Expanded);
+                    treeView.Items.Add(item);
+                }
             }
+            catch(Exception) { }
+
         }
 
         void folder_Expanded(object sender, RoutedEventArgs e)
@@ -69,7 +73,6 @@ namespace WindowsExplorer
                     subitem.Items.Add(dummyNode);
                     subitem.Expanded += new RoutedEventHandler(folder_Expanded);
                     item.Items.Add(subitem);
-
                 }
             }
         }
@@ -201,7 +204,6 @@ namespace WindowsExplorer
                     }
                 }
             }
-
         }
 
         private void btn_forward_Click(object sender, RoutedEventArgs e)
@@ -217,6 +219,7 @@ namespace WindowsExplorer
                             RightWrap.Children.Clear();
                             ClickTreeView(savePath[i]);
                             SelectedPath = savePath[i];
+                            btn_back.IsEnabled = true;
                             btn_forward.IsEnabled = false;
                         }
                         else if (i < savePath.Count-1)
@@ -224,10 +227,26 @@ namespace WindowsExplorer
                             RightWrap.Children.Clear();
                             ClickTreeView(savePath[i + 1]);
                             SelectedPath = savePath[i + 1];
+                            btn_back.IsEnabled = true;
                             break;
                         }
                     }
                 }
+            }
+        }
+
+        private void btn_go_Click(object sender, RoutedEventArgs e)
+        {
+            string ofText = exception.judgeExistDirectory(pathTextBox.Text);
+            if(ofText == "Don't Exist") { MessageBox.Show("입력하신 경로를 찾을 수 없습니다."); }
+            else
+            {
+                RightWrap.Children.Clear();
+                ClickTreeView(ofText);
+                pathTextBox.Text = ofText;
+                savePath.Add(ofText);
+                folderCount++;
+                SelectedPath = ofText;
             }
         }
     }

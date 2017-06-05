@@ -25,6 +25,7 @@ namespace WindowsExplorer
         TextBlock tb = new TextBlock();
         int fc;
         string name;
+
         public FloderIcon(string str)
         {
             InitializeComponent();
@@ -59,16 +60,17 @@ namespace WindowsExplorer
             root.Children.Add(tb);
             root.Margin = new Thickness(2);
             
-            this.MouseDown += new MouseButtonEventHandler(FolderIcon_MouseDown);
-
+            this.MouseUp += new MouseButtonEventHandler(FolderIcon_MouseUp);
+            this.MouseEnter += new MouseEventHandler(FolderIcon_MouseEnter);
+            this.MouseLeave += new MouseEventHandler(FolderIcon_MouseLeave);
         }
 
-        void FolderIcon_MouseDown(object sender, MouseButtonEventArgs e)
+        void FolderIcon_MouseUp(object sender, MouseButtonEventArgs e)
         {
             if (fc == 0)
             {
-                root.Background = new SolidColorBrush(Colors.WhiteSmoke);
-                tb.Foreground = new SolidColorBrush(Colors.Green);
+                root.Background = new SolidColorBrush(Colors.SteelBlue);
+                tb.Foreground = new SolidColorBrush(Colors.Black);
                 string shortName = tb.Text;
                 tb.Text = name;
                 name = shortName;
@@ -85,9 +87,25 @@ namespace WindowsExplorer
                 fc = 0;
             }
         }
-        void FolderIcon_MouseEnter()
+        void FolderIcon_MouseLeave(object sender, MouseEventArgs e)
         {
+           root.Background = new SolidColorBrush(Colors.Transparent);
+            if(fc == 1)
+            {
+                root.Background = new SolidColorBrush(Colors.SteelBlue);
+            }
+            else if(fc == 0)
+            {
+                root.Background = new SolidColorBrush(Colors.Transparent);
+            }
+            
+        }
+        
 
+        void FolderIcon_MouseEnter(object sender, MouseEventArgs e)
+        {
+                root.Background = new SolidColorBrush(Colors.SkyBlue);
+            
         }
     }
     

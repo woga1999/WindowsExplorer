@@ -68,6 +68,8 @@ namespace WindowsExplorer
             }
             catch (Exception) { }
             this.MouseDown += new MouseButtonEventHandler(FileIcon_MouseDown);
+            this.MouseEnter += new MouseEventHandler(FileIcon_MouseEnter);
+            this.MouseLeave += new MouseEventHandler(FileIcon_MouseLeave);
         }
 
         public System.Windows.Media.ImageSource getIcon(string filename)
@@ -93,8 +95,8 @@ namespace WindowsExplorer
             if (fc == 0)
             {
 
-                root.Background = new SolidColorBrush(Colors.WhiteSmoke);
-                tb.Foreground = new SolidColorBrush(Colors.Green);
+                root.Background = new SolidColorBrush(Colors.SkyBlue);
+                tb.Foreground = new SolidColorBrush(Colors.Black);
                 string shortName = tb.Text;
                 tb.Text = name;
                 name = shortName;
@@ -110,9 +112,23 @@ namespace WindowsExplorer
                 fc = 0;
             }
         }
+
         void FileIcon_MouseEnter(object sender, MouseEventArgs e)
         {
+            root.Background = new SolidColorBrush(Colors.SkyBlue);
+        }
 
+        void FileIcon_MouseLeave(object sender, MouseEventArgs e)
+        {
+            root.Background = new SolidColorBrush(Colors.Transparent);
+            if (fc == 1)
+            {
+                root.Background = new SolidColorBrush(Colors.SteelBlue);
+            }
+            else if (fc == 0)
+            {
+                root.Background = new SolidColorBrush(Colors.Transparent);
+            }
         }
     }
 }

@@ -17,33 +17,21 @@
                     <GradientStop Color="#FFF6F6F6" Offset="1"/>
                 </LinearGradientBrush>
             </DockPanel.Background>
-            <Button x:Name="btn_back"  IsEnabled ="false" Height="66" VerticalAlignment="Top" Width="104" Background="Transparent" BorderBrush="{x:Null}" Margin="0,0,0,-0.4" Click="btn_back_Click">
+            <Button x:Name="btn_back"  IsEnabled ="false" Height="66" VerticalAlignment="Top" Width="94" Background="Transparent" BorderBrush="{x:Null}" Margin="0,0,0,-0.4" Click="btn_back_Click">
                 <Grid Height="61">
                     <Image Source="left.png" Margin="0,9,10.2,10" />
                 </Grid>
             </Button>
-            <Button x:Name="btn_forward" IsEnabled ="false" Height="66" VerticalAlignment="Top" Width="109" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,-0.4" Click="btn_forward_Click">
+            <Button x:Name="btn_forward" IsEnabled ="false" Height="66" VerticalAlignment="Top" Width="95" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,-0.4" Click="btn_forward_Click">
                 <Grid>
                     <Image Source="right.png" Margin="0,10,-0.4,9.8" />
                 </Grid>
             </Button>
-            <TextBox x:Name="pathTextBox" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="499" Margin="0,21,0,9.6" Background="#FFF4F4F4" RenderTransformOrigin="0.501,0.408" IsEnabled="False" >
+            <TextBox x:Name="pathTextBox" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="579" Margin="0,21,0,9.6" Background="GhostWhite" RenderTransformOrigin="0.552,0.528" >
             </TextBox>
-            <Button x:Name="button2" Height="35" VerticalAlignment="Top" Width="44" Background="Transparent" BorderBrush="{x:Null}" Margin="0,21,0,0">
+            <Button x:Name="btn_go" Height="35" VerticalAlignment="Top" Width="51" Background="Transparent" BorderBrush="{x:Null}" Margin="0,21,0,0" RenderTransformOrigin="0.503,0.442" Click="btn_go_Click">
                 <Grid>
-                    <Image Source="down.png"/>
-                </Grid>
-            </Button>
-            <Button x:Name="button3" Height="35" VerticalAlignment="Top" Width="38" Background="Transparent" BorderBrush="{x:Null}" Margin="0,21,0,0" RenderTransformOrigin="0.5,0.5">
-                <Button.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform ScaleX="-1"/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Button.RenderTransform>
-                <Grid>
+                    <Image Source="enter.png"/>
                 </Grid>
             </Button>
         </DockPanel>
