@@ -22,9 +22,12 @@ namespace WindowsExplorer
     public partial class MainWindow : Window
     {
         MainExplorer explorer = new MainExplorer();
+        TreeViewItem firstRoot;
         public MainWindow()
         {
             InitializeComponent();
+            firstRoot = new TreeViewItem();
+            firstRoot.Header = "내 PC";
             MainGrid.Children.Add(explorer);
         }
         

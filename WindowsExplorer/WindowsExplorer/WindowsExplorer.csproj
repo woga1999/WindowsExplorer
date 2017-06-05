@@ -38,6 +38,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -56,6 +57,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="FileIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FloderIcon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainExplorer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -68,7 +77,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="FileIcon.xaml.cs">
+      <DependentUpon>FileIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FloderIcon.xaml.cs">
+      <DependentUpon>FloderIcon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="HeaderToImageConverter.cs" />
+    <Compile Include="IconHelper.cs" />
     <Compile Include="MainExplorer.xaml.cs">
       <DependentUpon>MainExplorer.xaml</DependentUpon>
     </Compile>
@@ -115,9 +131,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="folderopened_yellow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

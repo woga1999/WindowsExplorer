@@ -11,14 +11,20 @@
     <Grid Height="600" VerticalAlignment="Top">
 
         <DockPanel HorizontalAlignment="Left" Height="66" LastChildFill="False" VerticalAlignment="Top" Width="900">
-            <Button x:Name="back"  Height="66" VerticalAlignment="Top" Width="104" Background="Transparent" BorderBrush="{x:Null}" Margin="0,0,0,-0.4">
+            <DockPanel.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFFDFBEA" Offset="0.009"/>
+                    <GradientStop Color="#FFF6F6F6" Offset="1"/>
+                </LinearGradientBrush>
+            </DockPanel.Background>
+            <Button x:Name="btn_back"  IsEnabled ="false" Height="66" VerticalAlignment="Top" Width="104" Background="Transparent" BorderBrush="{x:Null}" Margin="0,0,0,-0.4" Click="btn_back_Click">
                 <Grid Height="61">
-                    <Image Source="left.png" />
+                    <Image Source="left.png" Margin="0,9,10.2,10" />
                 </Grid>
             </Button>
-            <Button x:Name="forward" Height="66" VerticalAlignment="Top" Width="109" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,-0.4">
+            <Button x:Name="btn_forward" IsEnabled ="false" Height="66" VerticalAlignment="Top" Width="109" Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,0,0,-0.4" Click="btn_forward_Click">
                 <Grid>
-                    <Image Source="right.png" />
+                    <Image Source="right.png" Margin="0,10,-0.4,9.8" />
                 </Grid>
             </Button>
             <TextBox x:Name="pathTextBox" Height="35" TextWrapping="Wrap"  VerticalAlignment="Center" Width="499" Margin="0,21,0,9.6" Background="#FFF4F4F4" RenderTransformOrigin="0.501,0.408" IsEnabled="False" >
@@ -42,8 +48,7 @@
             </Button>
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Margin="0,66,0,0" Width="211" RenderTransformOrigin="0.5,0.5">
-            <TreeView x:Name="treeView" Width="209" Margin="0,0,0,-0.6" Background="{x:Null}" Loaded="treeView_Loaded" BorderBrush="{x:Null}" SelectedItemChanged="treeView_SelectedItemChanged" Height="535" VerticalAlignment="Bottom" >
-
+            <TreeView x:Name="treeView" Width="212" Margin="0,0,0,-0.6" Background="{x:Null}" Loaded="treeView_Loaded" BorderBrush="#FFA09D9D" SelectedItemChanged="treeView_SelectedItemChanged" Height="525" VerticalAlignment="Bottom" >
                 <TreeView.Resources>
                     <Style TargetType="{x:Type TreeViewItem}">
 
@@ -66,10 +71,10 @@
                     </Style>
                 </TreeView.Resources>
             </TreeView>
+        </DockPanel>
+        <ScrollViewer Height="519" VerticalAlignment="Top" Margin="216,81,0,0">
+            <WrapPanel x:Name="RightWrap"  Height="524" Width="663" VerticalAlignment="Top"/>
+        </ScrollViewer>
 
-        </DockPanel>
-        <DockPanel LastChildFill="False" Margin="211,66,0,0" HorizontalAlignment="Left" Width="689">
-            <ScrollViewer Height="534" VerticalAlignment="Top" Width="690"/>
-        </DockPanel>
     </Grid>
 </UserControl>
