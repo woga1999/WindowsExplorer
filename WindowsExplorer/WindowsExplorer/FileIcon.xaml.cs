@@ -21,7 +21,7 @@ namespace WindowsExplorer
     /// FileIcon.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class FileIcon : UserControl
-    {
+    {//각 파일이미지에 걸려있는 이미지와 이벤트 
         TextBlock fileTextBlock = new TextBlock();
         int flag; string name;
        

@@ -5,12 +5,12 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WindowsExplorer"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="900">
+      d:DesignHeight="680" d:DesignWidth="950">
 
 
-    <Grid Height="600" VerticalAlignment="Top">
+    <Grid Height="650" VerticalAlignment="Top" Margin="0,0,0.4,-0.4">
 
-        <DockPanel HorizontalAlignment="Left" Height="66" LastChildFill="False" VerticalAlignment="Top" Width="900">
+        <DockPanel HorizontalAlignment="Left" Height="66" LastChildFill="False" VerticalAlignment="Top" Width="919">
             <DockPanel.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FFFDFBEA" Offset="0.009"/>
@@ -36,10 +36,9 @@
             </Button>
         </DockPanel>
         <DockPanel HorizontalAlignment="Left" LastChildFill="False" Margin="0,66,0,0" Width="211" RenderTransformOrigin="0.5,0.5">
-            <TreeView x:Name="treeView" Width="212" Margin="0,0,0,-0.6" Background="{x:Null}" Loaded="treeView_Loaded" BorderBrush="#FFA09D9D" SelectedItemChanged="treeView_SelectedItemChanged" Height="525" VerticalAlignment="Bottom" >
+            <TreeView x:Name="treeView" Width="212" Margin="0,0,0,10" Background="{x:Null}" Loaded="treeView_Loaded" BorderBrush="#FFA09D9D" SelectedItemChanged="treeView_SelectedItemChanged" Height="564" VerticalAlignment="Bottom"  >
                 <TreeView.Resources>
                     <Style TargetType="{x:Type TreeViewItem}">
-
                         <Setter Property="HeaderTemplate">
                             <Setter.Value>
                                 <DataTemplate>
@@ -60,8 +59,8 @@
                 </TreeView.Resources>
             </TreeView>
         </DockPanel>
-        <ScrollViewer Height="519" VerticalAlignment="Top" Margin="216,81,0,0">
-            <WrapPanel x:Name="RightWrap"  Height="524" Width="663" VerticalAlignment="Top"/>
+        <ScrollViewer Height="559" VerticalAlignment="Top" Margin="216,81,31,0" VerticalScrollBarVisibility="Auto">
+            <WrapPanel x:Name="RightWrap"  VerticalAlignment="Stretch" Width="663" />
         </ScrollViewer>
 
     </Grid>

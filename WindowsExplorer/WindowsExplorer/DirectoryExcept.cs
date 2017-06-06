@@ -8,7 +8,7 @@ using System.IO;
 namespace WindowsExplorer
 {
     class DirectoryExcept
-    {
+    {//폴더 주소 있는지 확인
         //MainExplorer mainEx;
         //public DirectoryExcept(MainExplorer main)
         //{
