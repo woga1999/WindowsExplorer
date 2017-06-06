@@ -22,9 +22,9 @@ namespace WindowsExplorer
     public partial class MainExplorer : UserControl
     {
         private DirectoryExcept exception = new DirectoryExcept();
-        public DateTime lastClick = DateTime.Now.AddSeconds(-1);
-        public FileIcon originFicon = new FileIcon("");
-        public FloderIcon origin = new FloderIcon("");
+        //public DateTime lastClick = DateTime.Now.AddSeconds(-1);
+        //public FileIcon originFicon = new FileIcon("");
+        //public FloderIcon origin = new FloderIcon("");
         private object dummyNode = null;
         public List<string> savePath = new List<string>();
         int folderCount = 0;

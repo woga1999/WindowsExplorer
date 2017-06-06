@@ -29,8 +29,8 @@ namespace WindowsExplorer
         {
             InitializeComponent();
             flag = 0;
-            try
-            {
+            //try
+            //{
                 Rectangle rect = new Rectangle();
                 ImageBrush ibrush = new ImageBrush();
                 ibrush.ImageSource = getIcon(str);
@@ -64,8 +64,7 @@ namespace WindowsExplorer
                 root.Children.Add(rect);
                 root.Children.Add(fileTextBlock);
                 root.Margin = new Thickness(2);
-            }
-            catch (Exception) { }
+            //}
             this.MouseDown += new MouseButtonEventHandler(FileIcon_MouseDown);
             this.MouseEnter += new MouseEventHandler(FileIcon_MouseEnter);
             this.MouseLeave += new MouseEventHandler(FileIcon_MouseLeave);

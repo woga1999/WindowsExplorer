@@ -17,11 +17,18 @@ namespace WindowsExplorer
         public string judgeExistDirectory(string path)
         {
             string ofText = null;
-            DirectoryInfo subInfo = new DirectoryInfo(path);
-            if (subInfo.Exists)
+            if (path != "" && !path.Contains(" "))
             {
-                ofText = path;
-                return ofText;
+                DirectoryInfo subInfo = new DirectoryInfo(path);
+                if (subInfo.Exists)
+                {
+                    ofText = path;
+                    return ofText;
+                }
+                else
+                {
+                    ofText = "Don't Exist";
+                }
             }
             else
             {
