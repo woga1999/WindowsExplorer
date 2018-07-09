@@ -20,7 +20,7 @@ namespace WindowsExplorer
     /// FloderIcon.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class FloderIcon : UserControl
-    {
+    { //폴더 아이콘 이미지와 이벤트가 걸려있는 클래스 각각 폴더 생성할 때마다 들어간다.
         TextBlock folderTextBlock = new TextBlock();
         int flag;
         string name;
